@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Guitar Amp</title>
+    <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+    <canvas id="visualiser"></canvas>
+    <div class="flex">
+        <div class="control">
+            <label for="volume">Gain</label>
+            <input type="range" id="volume" min="0" max="1" value=".5" step=".01" />
+            <span id="volume-output"></span>
+        </div>
+
+        <div class="control">
+            <label for="bass">Bass</label>
+            <input type="range" id="bass" min="-10" max="10" value="0" />
+            <span id="bass-output"></span>
+        </div>
+
+        <div class="control">
+            <label for="mid">Mid</label>
+            <input type="range" id="mid" min="-10" max="10" value="0" />
+            <span id="mid-output"></span>
+        </div>
+
+        <div class="control">
+            <label for="treble">Treble</label>
+            <input type="range" id="treble" min="-10" max="10" value="0" />
+            <span id="treble-output"></span>
+        </div>
+
+        <div class="control">
+            <label for="distortion">Distortion</label>
+            <input type="range" id="distortion" min="0" max="500" value="0" />
+            <span id="distortion-output"></span>
+        </div>
+
+        <div class="control">
+            <label for="delay">Delay</label>
+            <input type="range" id="delay" min="0" max="10000" value="0" />
+            <span id="delay-output"></span>
+        </div>
+
+        <button id="powerBtn">On / Off</button>
+    </div>
+    <script src="js/utils.js" defer></script>
+    <script src="js/controls.js" defer></script>
+    <script src="js/effects.js" defer></script>
+    <script src="js/amp.js" defer></script>
+</body>
+</html>

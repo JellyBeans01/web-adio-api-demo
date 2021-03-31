@@ -1,0 +1,28 @@
+html, body {
+    padding: 0;
+    margin: 0;
+    background-color: #e3e3e3;
+}
+
+canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+    pointer-events: none;
+}
+
+.flex {
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: flex-start;
+}
+
+.control {
+    padding: 5px 10px;
+    display: flex;
+    flex-flow: row wrap;
+    justify-items: center;
+}
