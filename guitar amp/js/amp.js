@@ -131,6 +131,10 @@ powerBtn.addEventListener("click", () => {
         cleanLed.classList.add("led-on");
         cleanLed2.classList.add("led-on");
 
+        if (parseFloat(efx.value) > 0) efxLed.classList.add("led-on");
+        if (parseFloat(delay.value) > 0) delayLed.classList.add("led-on");
+        if (parseFloat(reverb.value) > 0) reverbLed.classList.add("led-on");
+
         setupContext();
         resize();
         drawVisualiser();

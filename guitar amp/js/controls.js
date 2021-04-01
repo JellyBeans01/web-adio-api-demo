@@ -75,18 +75,30 @@ treble.addEventListener("input", (evt) => {
 efx.addEventListener("input", (evt) => {
     // range = [0, 400]
     const value = parseFloat(evt.target.value);
+
+    if (value > 0 && poweredOn) efxLed.classList.add("led-on");
+    else efxLed.classList.remove("led-on");
+
     turnKnob(efxKnob, value / 40);
 });
 
 delay.addEventListener("input", (evt) => {
     // range = [0, 200]
     const value = parseFloat(evt.target.value);
+
+    if (value > 0 && poweredOn) delayLed.classList.add("led-on");
+    else delayLed.classList.remove("led-on");
+
     turnKnob(delayKnob, value / 20);
 });
 
 reverb.addEventListener("input", (evt) => {
     // range = [0, 200]
     const value = parseFloat(evt.target.value);
+
+    if (value > 0 && poweredOn) reverbLed.classList.add("led-on");
+    else reverbLed.classList.remove("led-on");
+
     turnKnob(reverbKnob, value / 20);
 });
 
