@@ -7,44 +7,56 @@
 </head>
 <body>
     <canvas id="visualiser"></canvas>
-    <div class="flex">
-        <div class="control">
-            <label for="volume">Gain</label>
-            <input type="range" id="volume" min="0" max="1" value=".5" step=".01" />
-            <span id="volume-output"></span>
-        </div>
+    <div>
+        <img src="assets/amp.png" alt="Roland Cube 40GX" class="amp" />
 
-        <div class="control">
-            <label for="bass">Bass</label>
-            <input type="range" id="bass" min="-10" max="10" value="0" />
-            <span id="bass-output"></span>
-        </div>
+        <!-- Channel leds / btns -->
+        <div id="clean-led" class="led clean-led"></div>
+        <button id="clean-btn" class="btn select-btn clean-btn"></button>
+        <div id="lead-led" class="led lead-led"></div>
+        <button id="lead-btn" class="btn select-btn lead-btn"></button>
 
-        <div class="control">
-            <label for="mid">Mid</label>
-            <input type="range" id="mid" min="-10" max="10" value="0" />
-            <span id="mid-output"></span>
-        </div>
+        <!-- Clean / Lead leds -->
+        <div id="clean-led-2" class="led clean-led-2"></div>
+        <div id="lead-led-2" class="led lead-led-2"></div>
 
-        <div class="control">
-            <label for="treble">Treble</label>
-            <input type="range" id="treble" min="-10" max="10" value="0" />
-            <span id="treble-output"></span>
-        </div>
+        <!-- EQ -->
+        <div id="bass-knob" class="knob bass-knob"></div>
+        <input type="range" id="bass" min="-10" max="10" value="0" aria-orientation="vertical" class="bass-input" />
+        <div id="middle-knob" class="knob middle-knob"></div>
+        <input type="range" id="mid" min="-10" max="10" value="0" aria-orientation="vertical" class="mid-input" />
+        <div id="treble-knob" class="knob treble-knob"></div>
+        <input type="range" id="treble" min="-10" max="10" value="0" aria-orientation="vertical" class="treble-input" />
 
-        <div class="control">
-            <label for="distortion">Distortion</label>
-            <input type="range" id="distortion" min="0" max="500" value="0" />
-            <span id="distortion-output"></span>
-        </div>
+        <!-- Effects -->
+        <div id="efx-led" class="led efx-led"></div>
+        <div id="delay-led" class="led delay-led"></div>
+        <div id="reverb-led" class="led reverb-led"></div>
+        <div id="efx-knob" class="knob efx-knob"></div>
+        <div id="delay-knob" class="knob delay-knob"></div>
+        <div id="reverb-knob" class="knob reverb-knob"></div>
+        <input type="range" id="efx" min="0" max="400" value="0" aria-orientation="vertical" class="efx-input" />
+        <input type="range" id="delay" min="0" max="200" value="0" aria-orientation="vertical" class="delay-input" />
+        <input type="range" id="reverb" min="0" max="200" value="0" aria-orientation="vertical" class="reverb-input" />
 
-        <div class="control">
-            <label for="delay">Delay</label>
-            <input type="range" id="delay" min="0" max="10000" value="0" />
-            <span id="delay-output"></span>
-        </div>
+        <!-- Volume -->
+        <div id="volume-clean" class="knob clean-volume-knob"></div>
+        <div id="volume-lead" class="knob lead-volume-knob"></div>
+        <div id="volume-master" class="knob master-volume-knob"></div>
+        <input type="range" id="clean-volume" min="0" max="1" value="0" step=".01" aria-orientation="vertical" class="volume-clean-input" />
+        <input type="range" id="lead-volume" min="0" max="1" value="0" step=".01" aria-orientation="vertical" class="volume-lead-input" />
+        <input type="range" id="master-volume" min="0" max="1" value="0" step=".01" aria-orientation="vertical" class="volume-master-input" />
 
-        <button id="powerBtn">On / Off</button>
+        <!-- Preset -->
+        <div id="preset-knob" class="knob preset-knob"></div>
+        <input type="range" id="preset" min="0" max="9" value="5" step="1" aria-orientation="vertical" class="preset-input" />
+
+        <!-- Gain -->
+        <div id="gain-knob" class="knob gain-knob"></div>
+        <input type="range" id="gain" min="0" max="1" value="0" step=".01" aria-orientation="vertical" class="gain-input" />
+
+        <!-- Power btn -->
+        <button id="power-btn" class="btn power-btn"></button>
     </div>
     <script src="js/utils.js" defer></script>
     <script src="js/controls.js" defer></script>

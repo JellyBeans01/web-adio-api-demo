@@ -1,12 +1,20 @@
 "use strict"
 
 const visualiser = document.getElementById("visualiser");
-const powerBtn = document.getElementById("powerBtn");
+const powerBtn = document.getElementById("power-btn");
+
+const cleanLed = document.getElementById("clean-led");
+const leadLed = document.getElementById("lead-led");
+const cleanLed2 = document.getElementById("clean-led-2");
+const leadLed2 = document.getElementById("lead-led-2");
+const efxLed = document.getElementById("efx-led");
+const delayLed = document.getElementById("delay-led");
+const reverbLed = document.getElementById("reverb-led");
 
 let poweredOn = false;
 const context = new AudioContext({ latencyHint: "interactive" });
 const analyserNode = new AnalyserNode(context, { fftSize: 256 });
-const gainNode = new GainNode(context, { gain: volume.value });
+const gainNode = new GainNode(context, { gain: gain.value });
 const distortionNode = context.createWaveShaper();
 const delayNode = context.createDelay(100);
 const feedbackNode = context.createGain();
@@ -14,6 +22,9 @@ const bypassNode = context.createGain();
 
 let source = null;
 const sampleRate = 44100;
+
+initialiseButtonRotations();
+
 
 /*
     Filters
@@ -116,11 +127,24 @@ powerBtn.addEventListener("click", () => {
     poweredOn = !poweredOn;
 
     if (poweredOn) {
+        powerBtn.classList.add("powered-on");
+        cleanLed.classList.add("led-on");
+        cleanLed2.classList.add("led-on");
+
         setupContext();
         resize();
         drawVisualiser();
     } else {
+        powerBtn.classList.remove("powered-on");
+        cleanLed.classList.remove("led-on");
+        cleanLed2.classList.remove("led-on");
+        leadLed.classList.remove("led-on");
+        leadLed2.classList.remove("led-on");
+        efxLed.classList.remove("led-on");
+        delayLed.classList.remove("led-on");
+        reverbLed.classList.remove("led-on");
+
         source.disconnect();
         source = null;
     }
-})
+});

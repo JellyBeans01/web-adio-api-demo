@@ -14,15 +14,234 @@ canvas {
     pointer-events: none;
 }
 
-.flex {
-    display: flex;
-    flex-flow: column wrap;
-    justify-content: flex-start;
+.amp {
+    pointer-events: none;
 }
 
-.control {
-    padding: 5px 10px;
-    display: flex;
-    flex-flow: row wrap;
-    justify-items: center;
+/* =========================================================
+                           BUTTONS
+========================================================= */
+.btn {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
 }
+
+.select-btn {
+    height: 20px;
+    width: 28px;
+}
+
+.power-btn {
+    position: absolute;
+    left: 638px;
+    top: 45px;
+    height: 43px;
+    width: 30px;
+    background-image: url("../assets/power_btn.png");
+}
+
+.clean-btn {
+    position: absolute;
+    left: 106px;
+    top: 53px;
+}
+
+.lead-btn {
+    position: absolute;
+    left: 106px;
+    top: 112px;
+}
+
+
+/* =========================================================
+                           LEDs
+========================================================= */
+.led {
+    position: absolute;
+    width: 9px;
+    height: 10px;
+    background-image: url("../assets/led_off.png");
+}
+
+.clean-led {
+    top: 30px;
+    left: 116px;
+}
+
+.clean-led-2 {
+    left: 238px;
+    top: 110px;
+}
+
+.lead-led {
+    top: 85px;
+    left: 116px;
+}
+
+.lead-led-2 {
+    top: 110px;
+    left: 278px;
+}
+
+.efx-led {
+    top: 12px;
+    left: 366px;
+}
+
+.delay-led {
+    top: 12px;
+    left: 448px;
+}
+
+.reverb-led {
+    top: 12px;
+    left: 529px;
+}
+
+/* =========================================================
+                           KNOBS
+========================================================= */
+.knob {
+    position: absolute;
+    height: 50px;
+    width: 48px;
+    transform: rotate(-145deg);
+    z-index: 1;
+    pointer-events: none;
+    background-image: url("../assets/knob.png");
+}
+
+.bass-knob {
+    top: 41px;
+    left: 164px;
+}
+
+.middle-knob {
+    top: 41px;
+    left: 233px;
+}
+
+.treble-knob {
+    top: 41px;
+    left: 302px;
+}
+
+.efx-knob {
+    top: 41px;
+    left: 381px;
+}
+
+.delay-knob {
+    top: 41px;
+    left: 463px;
+}
+
+.reverb-knob {
+    top: 41px;
+    left: 546px;
+}
+
+.clean-volume-knob {
+    top: 156px;
+    left: 173px;
+}
+
+.preset-knob {
+    top: 156px;
+    left: 349px;
+}
+
+.gain-knob {
+    top: 156px;
+    left: 472px;
+}
+
+.lead-volume-knob {
+    top: 156px;
+    left: 543px;
+}
+
+.master-volume-knob {
+    top: 153px;
+    left: 629px;
+}
+
+/* =========================================================
+                           INPUTS
+========================================================= */
+input[type=range] {
+    position: absolute;
+    writing-mode: bt-lr;
+    -webkit-appearance: slider-vertical;
+    display: block;
+    width: 35px;
+    height: 40px;
+    color: transparent;
+    background: transparent;
+}
+
+input[type=range]:hover {
+    cursor: pointer;
+}
+
+.bass-input {
+    top: 44px;
+    left: 168px;
+}
+
+.mid-input {
+    top: 44px;
+    left: 238px;
+}
+
+.treble-input {
+    top: 44px;
+    left: 306px;
+}
+
+.efx-input {
+    top: 44px;
+    left: 388px;
+}
+
+.delay-input {
+    top: 44px;
+    left: 469px;
+}
+
+.reverb-input {
+    top: 44px;
+    left: 551px;
+}
+
+.volume-clean-input {
+    top: 159px;
+    left: 178px;
+}
+
+.volume-lead-input {
+    top: 159px;
+    left: 550px;
+}
+
+.volume-master-input {
+    top: 158px;
+    left: 636px;
+}
+
+.gain-input {
+    top: 159px;
+    left: 478px;
+}
+
+.preset-input {
+    top: 159px;
+    left: 355px;
+}
+
+/* =========================================================
+                        TOGGLE STATE
+========================================================= */
+.powered-on { background-image: none; }
+.led-on { background-image: url("../assets/led_on.png"); }
