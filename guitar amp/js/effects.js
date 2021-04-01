@@ -9,6 +9,13 @@ const makeDistortionCurve = (amount, sampleRate) => {
     return curve;
 };
 
-const createDelay = () => {
+const getReverbEffect = (context, impuleUrl) => {
+    return fetch(impuleUrl)
+        .then((response) => response.arrayBuffer())
+        .then((arrayBuffer) => context.decodeAudioData(arrayBuffer));
+};
 
-}
+checkEffects = (presetValue, isCleanChannel) => {
+    if (presetValue === 1 && !isCleanChannel) distortionNode.curve = makeDistortionCurve(400, sampleRate);
+    else distortionNode.curve = makeDistortionCurve(0, sampleRate);
+};

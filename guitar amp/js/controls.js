@@ -29,25 +29,29 @@ let isCleanChannel = true;
 
 clean.addEventListener("click", () => {
     if (!isCleanChannel && poweredOn) {
-        console.log("switch to clean")
+        console.log("[CHANNEL] switched to clean")
         isCleanChannel = true;
         cleanLed.classList.add("led-on");
         cleanLed2.classList.add("led-on");
 
         leadLed.classList.remove("led-on");
         leadLed2.classList.remove("led-on");
+
+        checkEffects(parseFloat(preset.value), isCleanChannel);
     }
 });
 
 lead.addEventListener("click", () => {
     if (isCleanChannel && poweredOn) {
-        console.log("switch to lead")
+        console.log("[CHANNEL] switched to lead")
         isCleanChannel = false;
         leadLed.classList.add("led-on");
         leadLed2.classList.add("led-on");
 
         cleanLed.classList.remove("led-on");
         cleanLed2.classList.remove("led-on");
+
+        checkEffects(parseFloat(preset.value), isCleanChannel);
     }
 });
 
@@ -92,12 +96,14 @@ delay.addEventListener("input", (evt) => {
     turnKnob(delayKnob, value / 20);
 });
 
-reverb.addEventListener("input", (evt) => {
+reverb.addEventListener("input", async (evt) => {
     // range = [0, 200]
     const value = parseFloat(evt.target.value);
 
     if (value > 0 && poweredOn) reverbLed.classList.add("led-on");
     else reverbLed.classList.remove("led-on");
+
+    reverbNode.buffer = await getReverbEffect(context, "../impulses/reverb.mp3");
 
     turnKnob(reverbKnob, value / 20);
 });
@@ -117,6 +123,7 @@ leadVolume.addEventListener("input", (evt) => {
 masterVolume.addEventListener("input", (evt) => {
     // range = [0, 1]
     const value = parseFloat(evt.target.value);
+    masterVolumeNode.gain.setTargetAtTime(value, context.currentTime, 0.01);
     turnKnob(masterVolumeKnob, value * 10);
 });
 
@@ -130,5 +137,6 @@ gain.addEventListener("input", (evt) => {
 preset.addEventListener("input", (evt) => {
     // range = [0, 9]
     const value = parseFloat(evt.target.value);
+    checkEffects(value, isCleanChannel);
     turnPresetKnob(value);
 });

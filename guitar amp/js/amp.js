@@ -14,11 +14,16 @@ const reverbLed = document.getElementById("reverb-led");
 let poweredOn = false;
 const context = new AudioContext({ latencyHint: "interactive" });
 const analyserNode = new AnalyserNode(context, { fftSize: 256 });
+
+const masterVolumeNode = new GainNode(context, { gain: masterVolume.value });
 const gainNode = new GainNode(context, { gain: gain.value });
+
+
 const distortionNode = context.createWaveShaper();
 const delayNode = context.createDelay(100);
 const feedbackNode = context.createGain();
 const bypassNode = context.createGain();
+const reverbNode = context.createConvolver();
 
 let source = null;
 const sampleRate = 44100;
@@ -62,14 +67,14 @@ const setupContext = async () => {
         .connect(bassEQ)
         .connect(midEQ)
         .connect(trebleEQ)
-        .connect(gainNode)
+        .connect(masterVolumeNode)
         .connect(distortionNode)
+        .connect(reverbNode)
         // .connect(delayNode)
         // .connect(feedbackNode)
         // .connect(delayNode)
         // .connect(bypassNode)
         .connect(analyserNode)
-        .connect(context.destination);
 };
 
 const getInput = () => {
