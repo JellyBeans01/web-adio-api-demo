@@ -103,8 +103,6 @@ reverb.addEventListener("input", async (evt) => {
     if (value > 0 && poweredOn) reverbLed.classList.add("led-on");
     else reverbLed.classList.remove("led-on");
 
-    reverbNode.buffer = await getReverbEffect(context, "../impulses/reverb.mp3");
-
     turnKnob(reverbKnob, value / 20);
 });
 

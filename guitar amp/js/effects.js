@@ -9,13 +9,33 @@ const makeDistortionCurve = (amount, sampleRate) => {
     return curve;
 };
 
-const getReverbEffect = (context, impuleUrl) => {
-    return fetch(impuleUrl)
-        .then((response) => response.arrayBuffer())
-        .then((arrayBuffer) => context.decodeAudioData(arrayBuffer));
-};
-
 checkEffects = (presetValue, isCleanChannel) => {
-    if (presetValue === 1 && !isCleanChannel) distortionNode.curve = makeDistortionCurve(400, sampleRate);
-    else distortionNode.curve = makeDistortionCurve(0, sampleRate);
+    // if (presetValue === 1 && !isCleanChannel) distortionNode.curve = makeDistortionCurve(400, sampleRate);
+    // else distortionNode.curve = makeDistortionCurve(0, sampleRate);
+    if (!isCleanChannel) {
+        switch (presetValue) {
+            case 0:
+                distortionNode.curve = makeDistortionCurve(0, sampleRate);
+                break;
+            case 1:
+            case 2:
+            case 3:
+            case 4:
+            case 5:
+            case 6:
+            case 7:
+                distortionNode.curve = makeDistortionCurve(400, sampleRate);
+                break;
+
+            case 8:
+                distortionNode.curve = makeDistortionCurve(1200, sampleRate);
+                break;
+
+            case 9:
+                distortionNode.curve = makeDistortionCurve(0, sampleRate);
+                break;
+        }
+    } else {
+        distortionNode.curve = makeDistortionCurve(0, sampleRate);
+    }
 };

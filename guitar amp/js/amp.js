@@ -20,10 +20,6 @@ const gainNode = new GainNode(context, { gain: gain.value });
 
 
 const distortionNode = context.createWaveShaper();
-const delayNode = context.createDelay(100);
-const feedbackNode = context.createGain();
-const bypassNode = context.createGain();
-const reverbNode = context.createConvolver();
 
 let source = null;
 const sampleRate = 44100;
@@ -69,12 +65,8 @@ const setupContext = async () => {
         .connect(trebleEQ)
         .connect(masterVolumeNode)
         .connect(distortionNode)
-        .connect(reverbNode)
-        // .connect(delayNode)
-        // .connect(feedbackNode)
-        // .connect(delayNode)
-        // .connect(bypassNode)
         .connect(analyserNode)
+        .connect(context.destination)
 };
 
 const getInput = () => {
