@@ -9,6 +9,21 @@ const makeDistortionCurve = (amount, sampleRate) => {
     return curve;
 };
 
+const efxDestroy = () => console.log(`[EFX] Off`);
+const efxChorus = (value) => console.log(`[EFX] Chorus: ${value}%`);
+const efxFlanger = (value) => console.log(`[EFX] Flanger: ${value}%`);
+const efxPhaser = (value) => console.log(`[EFX] Phaser: ${value}%`);
+const efxTremolo = (value) => console.log(`[EFX] Tremolo: ${value}%`);
+const efxHeavyOctave = (value) => console.log(`[EFX] Heavy Octave: ${value}%`);
+
+const delayDestroy = () => console.log("[DELAY] Off");
+const delayWarm = (value) => console.log(`[DELAY] Warm: ${value}`);
+const delayClear = (value) => console.log(`[DELAY] Clear: ${value}`);
+
+const reverbDestroy = () => console.log("[REVERB] Off");
+const reverbSpring = (value) => console.log(`[REVERB] Spring: ${value}`);
+const reverbPlate = (value) => console.log(`[REVERB] Plate: ${value}`);
+
 checkEffects = (presetValue, isCleanChannel) => {
     // if (presetValue === 1 && !isCleanChannel) distortionNode.curve = makeDistortionCurve(400, sampleRate);
     // else distortionNode.curve = makeDistortionCurve(0, sampleRate);

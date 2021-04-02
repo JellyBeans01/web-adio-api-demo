@@ -50,3 +50,10 @@ sequencers are well within reach.
 - It can be used to incorporate audio into your website or application
 - However, it can also be used to create advanced interactive instruments
 =>  it is suitable for both developers and musicians alike
+  
+## Package
+For these PoCs, I worked out everything myself. After some googling how to implement effects like reverb, flanger, delay...
+I came across [this package](https://github.com/Sambego/audio-effects) that basically has some effects already defined.
+
+There is also a guide how to extend the package and add your own custom sound effects. This is definitely something I will
+look at in the future!

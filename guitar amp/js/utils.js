@@ -18,6 +18,11 @@ const turnPresetKnob = (inputValue) => {
     // range = [-150, 120]
     const degrees = ((270 * inputValue) / 9) - 150;
     presetKnob.style.transform = `rotate(${degrees}deg)`;
+};
+
+checkLEDState = (led, shouldLightUp) => {
+    if (shouldLightUp) led.classList.add("led-on");
+    else led.classList.remove("led-on");
 }
 
 const initialiseButtonRotations = () => {

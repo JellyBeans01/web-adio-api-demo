@@ -15,6 +15,7 @@ let poweredOn = false;
 const context = new AudioContext({ latencyHint: "interactive" });
 const analyserNode = new AnalyserNode(context, { fftSize: 256 });
 
+const channelVolume = new GainNode(context, { gain: cleanVolume.value });
 const masterVolumeNode = new GainNode(context, { gain: masterVolume.value });
 const gainNode = new GainNode(context, { gain: gain.value });
 
@@ -64,6 +65,7 @@ const setupContext = async () => {
         .connect(midEQ)
         .connect(trebleEQ)
         .connect(masterVolumeNode)
+        .connect(channelVolume)
         .connect(distortionNode)
         .connect(analyserNode)
         .connect(context.destination)

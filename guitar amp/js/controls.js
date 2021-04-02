@@ -29,7 +29,7 @@ let isCleanChannel = true;
 
 clean.addEventListener("click", () => {
     if (!isCleanChannel && poweredOn) {
-        console.log("[CHANNEL] switched to clean")
+        console.log(`[CHANNEL] Clean, volume: ${cleanVolume.value * 100}%`);
         isCleanChannel = true;
         cleanLed.classList.add("led-on");
         cleanLed2.classList.add("led-on");
@@ -37,19 +37,23 @@ clean.addEventListener("click", () => {
         leadLed.classList.remove("led-on");
         leadLed2.classList.remove("led-on");
 
+        channelVolume.gain.setTargetAtTime(cleanVolume.value, context.currentTime, 0.01);
+
         checkEffects(parseFloat(preset.value), isCleanChannel);
     }
 });
 
 lead.addEventListener("click", () => {
     if (isCleanChannel && poweredOn) {
-        console.log("[CHANNEL] switched to lead")
+        console.log(`[CHANNEL] Lead, volume: ${leadVolume.value * 100}%`);
         isCleanChannel = false;
         leadLed.classList.add("led-on");
         leadLed2.classList.add("led-on");
 
         cleanLed.classList.remove("led-on");
         cleanLed2.classList.remove("led-on");
+
+        channelVolume.gain.setTargetAtTime(leadVolume.value, context.currentTime, 0.01);
 
         checkEffects(parseFloat(preset.value), isCleanChannel);
     }
@@ -77,22 +81,30 @@ treble.addEventListener("input", (evt) => {
 });
 
 efx.addEventListener("input", (evt) => {
-    // range = [0, 400]
+    // range = [0, 433]
     const value = parseFloat(evt.target.value);
 
-    if (value > 0 && poweredOn) efxLed.classList.add("led-on");
-    else efxLed.classList.remove("led-on");
+    // 0 = off; 101|201|301|401 = 1 (you cannot disable the effect when the knob is turned)
+    if (value === 0) efxDestroy();
+    else if (value > 0 && value <= 100) efxChorus(value);
+    else if (value > 100 && value <= 200) efxFlanger(value - 100);
+    else if (value > 200 && value <= 300) efxPhaser(value - 200);
+    else if (value > 300 && value <= 400) efxTremolo(value - 300);
+    else efxHeavyOctave((value - 400) * 3);
 
-    turnKnob(efxKnob, value / 40);
+    checkLEDState(efxLed, value > 0 && poweredOn);
+    turnKnob(efxKnob, value / 43.3);
 });
 
 delay.addEventListener("input", (evt) => {
     // range = [0, 200]
     const value = parseFloat(evt.target.value);
 
-    if (value > 0 && poweredOn) delayLed.classList.add("led-on");
-    else delayLed.classList.remove("led-on");
+    if (value === 0) delayDestroy();
+    else if (value > 0 && value <= 100) delayWarm(value);
+    else delayClear(value - 100);
 
+    checkLEDState(delayLed, value > 0 && poweredOn);
     turnKnob(delayKnob, value / 20);
 });
 
@@ -100,21 +112,25 @@ reverb.addEventListener("input", async (evt) => {
     // range = [0, 200]
     const value = parseFloat(evt.target.value);
 
-    if (value > 0 && poweredOn) reverbLed.classList.add("led-on");
-    else reverbLed.classList.remove("led-on");
+    if (value === 0) reverbDestroy();
+    else if (value > 0 && value <= 100) reverbSpring(value);
+    else reverbPlate(value - 100);
 
+    checkLEDState(reverbLed, value > 0 && poweredOn);
     turnKnob(reverbKnob, value / 20);
 });
 
 cleanVolume.addEventListener("input", (evt) => {
     // range = [0, 1]
     const value = parseFloat(evt.target.value);
+    if (isCleanChannel) channelVolume.gain.setTargetAtTime(value, context.currentTime, 0.01);
     turnKnob(cleanVolumeKnob, value * 10);
 });
 
 leadVolume.addEventListener("input", (evt) => {
     // range = [0, 1]
     const value = parseFloat(evt.target.value);
+    if (!isCleanChannel) channelVolume.gain.setTargetAtTime(value, context.currentTime, 0.01);
     turnKnob(leadVolumeKnob, value * 10);
 });
 
